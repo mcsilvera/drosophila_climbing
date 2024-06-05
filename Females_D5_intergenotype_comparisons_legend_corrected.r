@@ -1,4 +1,4 @@
-#Comparisons between genotpyes of D5 females
+#Comparisons between genotypes of D5 females
 
 # Install necessary packages one by one
 install.packages("readxl")
