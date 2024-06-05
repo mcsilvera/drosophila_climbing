@@ -1,4 +1,4 @@
-#Comparisons between ages (Females without WT)
+#Comparisons between ages
 # Install necessary packages one by one
 install.packages("readxl")
 install.packages("openxlsx")
