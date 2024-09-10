@@ -141,4 +141,23 @@ ggplot(data_long, aes(x = group, y = value, fill = group)) +
               size = 0.5,
               textsize = 5,
               y_position = c(11.5, 12)) 
+# Assuming data contains multiple repeated measures for each genotype
+# Combine 4 vectors into single data frame
+data_friedman <- data.frame(w1118, prtpΔ1, parkina, prtpΔ1parkina)
 
+# Convert data from wide to long format
+data_friedman_long <- gather(data_friedman, key = "group", value = "value")
+
+# Generate a subject identifier assuming rows correspond to subjects (replicates)
+data_friedman_long$subject <- rep(1:nrow(data_friedman), times = ncol(data_friedman))
+
+# Run the Friedman test
+friedman_result <- friedman.test(value ~ group | subject, data = data_friedman_long)
+
+# Print Friedman test results
+print(friedman_result)
+
+
+# Post-hoc pairwise Wilcoxon tests with Bonferroni correction
+pairwise.wilcox.test(data_friedman_long$value, data_friedman_long$group, 
+                     p.adjust.method = "bonferroni", paired = TRUE)
